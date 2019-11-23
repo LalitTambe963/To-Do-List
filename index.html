@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="main.css">
+    <script src="jquery.min.js"></script>
+    <title>To Do List</title>
+</head>
+<body>
+    <div id="container">
+        <h1>To-Do List <span id="new">+</span></h1>
+        <input type="text">
+
+        <ul>
+            <li><span>Delete</span> <div>Learn HTML</div></li>
+            <li><span>Delete</span> <div> Learn CSS</div></li>
+            <li><span>Delete</span> <div>Learn Javascript</div></li>
+        </ul>
+    </div>
+
+
+    <script>
+
+        $(function(){
+
+        // $("input").css("display","none");
+
+        //Loading Animation
+        $("#container").slideDown(300);
+        $("input[type='text']").attr("placeholder","Enter new todo");
+
+        //Input field slidetoggle
+        $("#new").on("click",function(){
+            $("input[type='text']").fadeToggle('linear');
+        });
+
+        //Hovering on a task
+        // $("ul").on("mouseover","li",function(){
+        //     $(this).children("span").slideDown();
+        // });
+        // $("ul").on("mouseleave","li",function(){
+        //     $(this).children("span").slideUp(100);
+        // });
+
+        //Check a todo
+        $("ul").on("click","li div", function(){
+            $(this).toggleClass("completed"); 
+        });
+
+        //Delete a list
+        $("ul").on("click","span", function(event){
+            event.stopPropagation();
+            $(this).parent().fadeOut('fast',function(){
+                $(this).remove();
+            });
+        });
+
+        //Enter a new todo
+        $("input[type='text']").keypress(function(event){
+            if(event.which === 13){
+                var todo = $(this).val();
+                console.log(todo);
+                $(this).val("");
+                //Add a new list item in ul
+                $("ul").append("<li><span>Delete</span> <div class=\"spacing\">" + todo + "</div></li>");
+            }
+        });
+
+    })
+    
+    </script>
+
+</body>
+</html>
+
+
